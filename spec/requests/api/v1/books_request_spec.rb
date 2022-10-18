@@ -6,7 +6,6 @@ describe "Books API" do
     books = create_list(:book, 3)
 
     get '/api/v1/books'
-    
     expect(response).to be_successful
 
     books_response = JSON.parse(response.body, symbolize_names: true)
@@ -119,8 +118,6 @@ describe "Books API" do
     deleted_book_response = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
-    expect(deleted_book_response[:id_of_deleted_book]).to eq(book.id)
-    expect(deleted_book_response[:message]).to eq("You deleted a book")
     expect(Book.count).to eq(0)
     expect{Book.find(book.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end
